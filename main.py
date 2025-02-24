@@ -1,12 +1,12 @@
+import sys
+
+from stats import count_words
+
+
 def read_file(file_path):
     """Reads a file and returns its content"""
     with open(file_path, encoding="utf8") as f:
         return f.read()
-
-
-def count_words(text):
-    """Counts the number of words in a text"""
-    return len(text.split())
 
 
 def count_characters(text):
@@ -34,22 +34,29 @@ def convert_dict_to_list(dict):
 
 def generate_report(book_path, word_count, char_count):
     """Prints a report of the book"""
-    print(f"--- Report for {book_path} ---")
-    print(f"{word_count} words found in this document.\n")
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book_path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {word_count} total words")
+    print("-------- Character Count --------")
 
     char_list = convert_dict_to_list(char_count)
     char_list.sort(reverse=True, key=sort_on)
 
     for char, count in char_list:
         if char.isalpha():
-            print(f"The '{char}' was found {count} times")
+            print(f"{char}: {count}")
 
-    print("\n--- end of report ---")
+    print("============= END ===============")
 
 
 def main():
     """Main function"""
-    book_path = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    book_path = sys.argv[1]
     book_text = read_file(book_path)
     word_count = count_words(book_text)
     char_count = count_characters(book_text)

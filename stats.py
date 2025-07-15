@@ -26,7 +26,7 @@ def get_sorted_character_count(character_count: dict) -> list:
     return sorted_count
 
 
-def print_report(book_path: str, number_of_words: int, character_count: dict):
+def print_report(book_path: str, number_of_words: int, character_count: list):
     print("============ BOOKBOT ============")
     print(f"Analyzing book found at {book_path}...")
     print("----------- Word Count ----------")
